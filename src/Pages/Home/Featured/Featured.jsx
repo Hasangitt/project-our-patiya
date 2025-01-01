@@ -1,139 +1,91 @@
-import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
-import { useState } from "react";
+import { Pagination } from "swiper/modules";
+import { Link } from "react-router-dom";
 const Featured = () => {
-  const [swiperRef, setSwiperRef] = useState(null);
-
-  let appendNumber = 4;
-  let prependNumber = 1;
-
-  const prepend2 = () => {
-    swiperRef.prependSlide([
-      '<div class="swiper-slide">Slide ' + --prependNumber + "</div>",
-      '<div class="swiper-slide">Slide ' + --prependNumber + "</div>",
-    ]);
-  };
-
-  const prepend = () => {
-    swiperRef.prependSlide(
-      '<div class="swiper-slide">Slide ' + --prependNumber + "</div>"
-    );
-  };
-
-  const append = () => {
-    swiperRef.appendSlide(
-      '<div class="swiper-slide">Slide ' + ++appendNumber + "</div>"
-    );
-  };
-
-  const append2 = () => {
-    swiperRef.appendSlide([
-      '<div class="swiper-slide">Slide ' + ++appendNumber + "</div>",
-      '<div class="swiper-slide">Slide ' + ++appendNumber + "</div>",
-    ]);
-  };
-
   return (
-    <div>
-      <div className="flex items-center justify-between mt-14 md:mt-10">
-        <h1 className="text-xl font-semibold">Featured</h1>
-        <Link className="text-orange-500 text-xl font-semibold underline">
-          View All
-        </Link>
+    <div className="space-y-20 mt-20">
+      <div>
+        <h1 className="text-4xl text-center font-semibold">FEATURED</h1>
       </div>
-      <div className="mt-14 md:mt-10">
+      <div>
         <Swiper
-          onSwiper={setSwiperRef}
-          slidesPerView={3}
+          // slidesPerView={2}
+          // spaceBetween={10}
           centeredSlides={true}
-          spaceBetween={400}
+          grabCursor={true}
           pagination={{
-            type: "fraction",
+            clickable: true,
           }}
-          navigation={true}
-          modules={[Pagination, Navigation]}
-          className="mySwiper border"
+          modules={[Pagination]}
+          breakpoints={{
+            // for small devices (sm)
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 5,
+            },
+            // for medium devices (md)
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 5,
+            },
+            // for larger devices
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 5,
+            },
+          }}
+          className="mySwiper"
         >
-          <SwiperSlide>
+          <SwiperSlide className="mb-10">
             <Link>
-              <div className="card bg-base-100 w-96 h-64 border p-4">
+              <div className="bg-white w-32 p-2 mx-auto border">
+                <img
+                  className="w-full h-fit"
+                  src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                  alt=""
+                />
+                <h1 className="text-black text-center">Schools</h1>
+              </div>
+            </Link>
+          </SwiperSlide>
+          <SwiperSlide className="mb-10">
+            <Link>
+              <div className="bg-white w-32 p-2 mx-auto border">
+                <img
+                  className="w-full h-fit"
+                  src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                  alt=""
+                />
+                <h1 className="text-black text-center">Schools</h1>
+              </div>
+            </Link>
+          </SwiperSlide>
+         
+          {/* <SwiperSlide className="mb-10">
+            <Link>
+              <div className="card bg-base-100 w-60 md:w-96 border mx-auto">
                 <figure>
                   <img
                     src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                     alt="Shoes"
                   />
                 </figure>
+                <div className="card-body">
                   <h2 className="card-title">Shoes!</h2>
                   <p>If a dog chews shoes whose shoes does he choose?</p>
-                 
+                  <div className="card-actions justify-end">
+                    <button className="btn btn-primary">Buy Now</button>
+                  </div>
+                </div>
               </div>
             </Link>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Link>
-              <div className="card bg-base-100 w-96 h-64 border p-4">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes"
-                  />
-                </figure>
-                  <h2 className="card-title">Shoes!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                 
-              </div>
-            </Link>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Link>
-              <div className="card bg-base-100 w-96 h-64 border p-4">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes"
-                  />
-                </figure>
-                  <h2 className="card-title">Shoes!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                 
-              </div>
-            </Link>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Link>
-              <div className="card bg-base-100 w-96 h-64 border p-4">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes"
-                  />
-                </figure>
-                  <h2 className="card-title">Shoes!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                 
-              </div>
-            </Link>
-          </SwiperSlide>
-          
-      
+          </SwiperSlide> */}
+         
         </Swiper>
-
-        <p className="append-buttons">
-          <button
-            onClick={() => prepend2()}
-            className="prepend-2-slides"
-          ></button>
-          <button onClick={() => prepend()} className="prepend-slide"></button>
-          <button onClick={() => append()} className="append-slide"></button>
-          <button
-            onClick={() => append2()}
-            className="append-2-slides"
-          ></button>
-        </p>
       </div>
     </div>
   );

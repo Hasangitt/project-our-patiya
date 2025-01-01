@@ -32,34 +32,22 @@ const Slider = () => {
           }}
           modules={[Autoplay, Pagination, Navigation]}
           onAutoplayTimeLeft={onAutoplayTimeLeft}
-          className="mySwiper h-56 md:h-64"
+          className="mySwiper h-"
         >
           <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-1.jpg" />
+            <img className="md:h-[450px] w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-1.jpg" />
           </SwiperSlide>
           <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-2.jpg" />
+            <img className="md:h-[450px] w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-1.jpg" />
           </SwiperSlide>
           <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-3.jpg" />
+            <img className="md:h-[450px] w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-1.jpg" />
           </SwiperSlide>
           <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-4.jpg" />
+            <img className="md:h-[450px] w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-1.jpg" />
           </SwiperSlide>
           <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-5.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-6.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-7.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-8.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img className="h-56 md:h-64 w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-9.jpg" />
+            <img className="md:h-[450px] w-full rounded-3xl" src="https://swiperjs.com/demos/images/nature-1.jpg" />
           </SwiperSlide>
           <span ref={progressCircle}></span>
           <span ref={progressContent}></span>
