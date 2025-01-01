@@ -1,91 +1,211 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 import { Link } from "react-router-dom";
+function ThumbnailPlugin(mainRef) {
+  return (slider) => {
+    function removeActive() {
+      slider.slides.forEach((slide) => {
+        slide.classList.remove("active");
+      });
+    }
+    function addActive(idx) {
+      slider.slides[idx].classList.add("active");
+    }
+
+    function addClickEvents() {
+      slider.slides.forEach((slide, idx) => {
+        slide.addEventListener("click", () => {
+          if (mainRef.current) mainRef.current.moveToIdx(idx);
+        });
+      });
+    }
+
+    slider.on("created", () => {
+      if (!mainRef.current) return;
+      addActive(slider.track.details.rel);
+      addClickEvents();
+      mainRef.current.on("animationStarted", (main) => {
+        removeActive();
+        const next = main.animator.targetIdx || 0;
+        addActive(main.track.absToRel(next));
+        slider.moveToIdx(Math.min(slider.track.details.maxIdx, next));
+      });
+    });
+  };
+}
 const Featured = () => {
+  const [sliderRef, instanceRef] = useKeenSlider({
+    initial: 0,
+  });
+  const [thumbnailRef] = useKeenSlider(
+    {
+      initial: 0,
+      slides: {
+        perView: 4,
+        spacing: 10,
+      },
+      breakpoints: {
+        // For small devices
+        "(max-width: 640px)": {
+          slides: {
+            perView: 2, // Show 2 slides for small devices
+            spacing: 5, // Adjust spacing for small screens
+          },
+        },
+        // For medium devices
+        "(max-width: 768px)": {
+          slides: {
+            perView: 3, // Show 3 slides for medium devices
+            spacing: 8, // Adjust spacing for medium screens
+          },
+        },
+      },
+    },
+    [ThumbnailPlugin(instanceRef)]
+  );
   return (
     <div className="space-y-20 mt-20">
       <div>
         <h1 className="text-4xl text-center font-semibold">FEATURED</h1>
       </div>
       <div>
-        <Swiper
-          // slidesPerView={2}
-          // spaceBetween={10}
-          centeredSlides={true}
-          grabCursor={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination]}
-          breakpoints={{
-            // for small devices (sm)
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 5,
-            },
-            // for medium devices (md)
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 5,
-            },
-            // for larger devices
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 5,
-            },
-          }}
-          className="mySwiper"
-        >
-          <SwiperSlide className="mb-10">
+        <div ref={sliderRef} className="keen-slider">
+          <div className="keen-slider__slide number-slide1">
             <Link>
-              <div className="bg-white w-32 p-2 mx-auto border">
+              <div className="bg-white w-full h-[400px] p-2 mx-auto">
                 <img
-                  className="w-full h-fit"
+                  className="w-full h-[400px]"
                   src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
                   alt=""
                 />
                 <h1 className="text-black text-center">Schools</h1>
               </div>
             </Link>
-          </SwiperSlide>
-          <SwiperSlide className="mb-10">
+          </div>
+          <div className="keen-slider__slide number-slide2">
             <Link>
-              <div className="bg-white w-32 p-2 mx-auto border">
+              <div className="bg-white w-full h-[400px] p-2 mx-auto">
                 <img
-                  className="w-full h-fit"
+                  className="w-full h-[400px]"
                   src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
                   alt=""
                 />
                 <h1 className="text-black text-center">Schools</h1>
               </div>
             </Link>
-          </SwiperSlide>
-         
-          {/* <SwiperSlide className="mb-10">
+          </div>
+          <div className="keen-slider__slide number-slide3">
             <Link>
-              <div className="card bg-base-100 w-60 md:w-96 border mx-auto">
-                <figure>
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">Shoes!</h2>
-                  <p>If a dog chews shoes whose shoes does he choose?</p>
-                  <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
-                  </div>
-                </div>
+              <div className="bg-white w-full h-[400px] p-2 mx-auto">
+                <img
+                  className="w-full h-[400px]"
+                  src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                  alt=""
+                />
+                <h1 className="text-black text-center">Schools</h1>
               </div>
             </Link>
-          </SwiperSlide> */}
-         
-        </Swiper>
+          </div>
+          <div className="keen-slider__slide number-slide4">
+            <Link>
+              <div className="bg-white w-full h-[400px] p-2 mx-auto">
+                <img
+                  className="w-full h-[400px]"
+                  src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                  alt=""
+                />
+                <h1 className="text-black text-center">Schools</h1>
+              </div>
+            </Link>
+          </div>
+          <div className="keen-slider__slide number-slide5">
+            <Link>
+              <div className="bg-white w-full h-[400px] p-2 mx-auto">
+                <img
+                  className="w-full h-[400px]"
+                  src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                  alt=""
+                />
+                <h1 className="text-black text-center">Schools</h1>
+              </div>
+            </Link>
+          </div>
+          <div className="keen-slider__slide number-slide6">
+            <Link>
+              <div className="bg-white w-full h-[400px] p-2 mx-auto">
+                <img
+                  className="w-full h-[400px]"
+                  src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                  alt=""
+                />
+                <h1 className="text-black text-center">Schools</h1>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        <div ref={thumbnailRef} className="keen-slider thumbnail">
+          <div className="keen-slider__slide number-slide1">
+            <div className="bg-white w-32 p-2 mx-auto">
+              <img
+                className="w-full h-fit"
+                src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                alt=""
+              />
+              <h1 className="text-black text-center">Schools</h1>
+            </div>
+          </div>
+          <div className="keen-slider__slide number-slide2">
+            <div className="bg-white w-32 p-2 mx-auto">
+              <img
+                className="w-full h-fit"
+                src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                alt=""
+              />
+              <h1 className="text-black text-center">Schools</h1>
+            </div>
+          </div>
+          <div className="keen-slider__slide number-slide3">
+            <div className="bg-white w-32 p-2 mx-auto">
+              <img
+                className="w-full h-fit"
+                src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                alt=""
+              />
+              <h1 className="text-black text-center">Schools</h1>
+            </div>
+          </div>
+          <div className="keen-slider__slide number-slide4">
+            <div className="bg-white w-32 p-2 mx-auto">
+              <img
+                className="w-full h-fit"
+                src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                alt=""
+              />
+              <h1 className="text-black text-center">Schools</h1>
+            </div>
+          </div>
+          <div className="keen-slider__slide number-slide5">
+            <div className="bg-white w-32 p-2 mx-auto">
+              <img
+                className="w-full h-fit"
+                src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                alt=""
+              />
+              <h1 className="text-black text-center">Schools</h1>
+            </div>
+          </div>
+          <div className="keen-slider__slide number-slide6">
+            <div className="bg-white w-32 p-2 mx-auto">
+              <img
+                className="w-full h-fit"
+                src="https://i.ibb.co.com/b34cj0y/Pngtree-school-building-flat-design-4815002.png"
+                alt=""
+              />
+              <h1 className="text-black text-center">Schools</h1>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
