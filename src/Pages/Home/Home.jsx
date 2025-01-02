@@ -1,5 +1,5 @@
 import Explore from "../Explore Everything/Explore";
-import Featured from "./Featured/Featured";
+// import Featured from "./Featured/Featured";
 import Slider from "./Slider/Slider";
 
 
@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <div>
           <Slider></Slider>
-          <Featured></Featured>
+          {/* <Featured></Featured> */}
           <Explore></Explore>
         </div>
     );

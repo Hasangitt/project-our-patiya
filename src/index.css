@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Noto+Serif+Bengali:wght@100..900&display=swap');
+:root{
+    background: hsl(204, 51%, 33%);
+    /* background: black; ; */
+    /* background: radial-gradient(circle, #7ed32ee3 0%, #000000 100%); ; */
+}
+
