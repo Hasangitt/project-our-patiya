@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Noto+Serif+Bengali:wght@100..900&display=swap');
-:root{
-    background: hsl(204, 51%, 33%);
-    /* background: black; ; */
-    /* background: radial-gradient(circle, #7ed32ee3 0%, #000000 100%); ; */
-}
 
+:root{
+    background: linear-gradient(to right, #013220, #000000, #4b4b4b);
+    /* background: linear-gradient(to top, #2c3e50, #000000); */
+    /* background: linear-gradient(to top, #d500f9, #000000); */
+    /* background: linear-gradient(to bottom, #000000, #434343); */
+
+}

@@ -1,14 +1,13 @@
-import useSchool from "../../Hooks/useSchool/useSchool";
+import useCollege from "../../Hooks/useCollege/useCollege";
 import Details from "../Shared/Details/Details";
 
-const Schools = () => {
-  const [schools] = useSchool();
-  console.log(schools);
+const College = () => {
+const [colleges] = useCollege();
   return (
     <div className="mb-20">
       <div>
         <h1 className="text-white text-center noto-serif-bengali font-semibold text-5xl my-14">
-         মাধ্যমিক স্কুলসমূহ
+         কলেজ সমূহ
         </h1>
       </div>
       <div className="mb-10  md:w-3/4 mx-auto">
@@ -28,16 +27,16 @@ const Schools = () => {
           </svg>
         </label>
       </div>
-      <div className="space-y-10">
-        {schools.map((school) => (
-          <Details 
-          key={school._id} 
-          school={school}
-          ></Details>
-        ))}
-      </div>
+       <div className="space-y-10">
+             {colleges.map((college) => (
+               <Details 
+               key={college._id} 
+               school={college}
+               ></Details>
+             ))}
+           </div>
     </div>
   );
 };
 
-export default Schools;
+export default College;
