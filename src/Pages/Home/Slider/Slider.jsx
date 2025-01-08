@@ -7,10 +7,10 @@ import { useRef } from "react";
 const Slider = () => {
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
-  const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty("--progress", 1 - progress);
-    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-  };
+  // const onAutoplayTimeLeft = (s, time, progress) => {
+  //   progressCircle.current.style.setProperty("--progress", 1 - progress);
+  //   progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+  // };
   return (
     <div className="space-y-10">
       <div className="mt-10 space-y-2">

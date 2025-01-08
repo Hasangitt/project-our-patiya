@@ -1,19 +1,33 @@
+import { useState } from "react";
 import useSchool from "../../Hooks/useSchool/useSchool";
 import Details from "../Shared/Details/Details";
 
 const Schools = () => {
-  const [schools] = useSchool();
-  console.log(schools);
+  const [schools, loading] = useSchool();
+  const [searchTerm, setSearchTerm] = useState("");
+  const filterdSchools = schools.filter((school) =>
+    school.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  if (loading) {
+    return <span className="loading loading-dots loading-lg"></span>;
+  }
+
   return (
     <div className="mb-20">
       <div>
         <h1 className="text-white text-center noto-serif-bengali font-semibold text-5xl my-14">
-         মাধ্যমিক স্কুলসমূহ
+          মাধ্যমিক স্কুলসমূহ
         </h1>
       </div>
       <div className="mb-10  md:w-3/4 mx-auto">
         <label className="input input-bordered flex items-center gap-2">
-          <input type="text" className="grow" placeholder="Search" />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="grow"
+            placeholder="স্কুলের নাম লিখে খুঁজুন"
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -28,13 +42,16 @@ const Schools = () => {
           </svg>
         </label>
       </div>
-      <div className="space-y-10">
-        {schools.map((school) => (
-          <Details 
-          key={school._id} 
-          school={school}
-          ></Details>
-        ))}
+      <div >
+        {filterdSchools.length === 0 ? (
+          <p className="text-red-400 text-3xl text-center mt-10">কোনো তথ্য পাওয়া যায়নি</p>
+        ) : (
+          <div className="space-y-10">
+            {filterdSchools.map((school) => (
+              <Details key={school._id} school={school}></Details>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

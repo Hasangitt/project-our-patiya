@@ -1,8 +1,17 @@
+import { useState } from "react";
 import useCollege from "../../Hooks/useCollege/useCollege";
 import Details from "../Shared/Details/Details";
 
 const College = () => {
-const [colleges] = useCollege();
+const [colleges, loading] = useCollege();
+ const [searchTerm, setSearchTerm] = useState("");
+  const filterdColleges = colleges.filter((college) =>
+    college.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  if (loading) {
+    return <span className="loading loading-dots loading-lg"></span>;
+  }
+
   return (
     <div className="mb-20">
       <div>
@@ -12,7 +21,13 @@ const [colleges] = useCollege();
       </div>
       <div className="mb-10  md:w-3/4 mx-auto">
         <label className="input input-bordered flex items-center gap-2">
-          <input type="text" className="grow" placeholder="Search" />
+        <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="grow"
+            placeholder="কলেজের নাম লিখে খুঁজুন"
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -27,14 +42,17 @@ const [colleges] = useCollege();
           </svg>
         </label>
       </div>
-       <div className="space-y-10">
-             {colleges.map((college) => (
-               <Details 
-               key={college._id} 
-               school={college}
-               ></Details>
-             ))}
-           </div>
+       <div>
+              {filterdColleges.length === 0 ? (
+                <p className="text-red-400 text-3xl text-center mt-10">কোনো তথ্য পাওয়া যায়নি</p>
+              ) : (
+                <div className="space-y-10">
+                  {filterdColleges.map((college) => (
+                    <Details key={college._id} school={college}></Details>
+                  ))}
+                </div>
+              )}
+            </div>
     </div>
   );
 };
